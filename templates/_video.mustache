@@ -1,0 +1,10 @@
+<div class="play_overlay"></div>
+
+{{#frames}}
+	<img src="{{url}}"/>
+{{/frames}}{{^frames}}
+	<img src="{{thumbnail.url}}" width="{{thumbnail.width}}" height="{{thumbnail.height}}"/>
+{{/frames}}
+
+<div class="caption">{{caption}}</div>
+

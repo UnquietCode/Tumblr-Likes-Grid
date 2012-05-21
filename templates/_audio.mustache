@@ -1,0 +1,21 @@
+{{#thumbnail}}
+	<img src="{{thumbnail}}" width="100%"/>
+{{/thumbnail}}
+
+{{^thumbnail}}
+  <div class="title">
+{{/thumbnail}}{{#thumbnail}}
+  <div class="title popoutText">
+{{/thumbnail}}
+	<img src="images/archive_listen_icon.png" class="listen_icon" width="8" height="9" alt="Listen"/>
+	{{text}}
+</div>
+
+{{^thumbnail}}
+	{{#info}}
+		<br/>
+		<div class="overprint nowrap centerText">
+			{{{info}}}
+		</div>
+	{{/info}}
+{{/thumbnail}}

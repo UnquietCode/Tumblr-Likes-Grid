@@ -1,0 +1,111 @@
+<html>
+<head>
+    <link href="archive.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+    <script type="text/javascript" src="mustache.js"></script>
+    <script type="text/javascript" src="likes.js"></script>
+	<script type="text/javascript">
+		$(function() {
+            likes.startUp();
+            
+            $("#about").click(function() {
+                $('<a href="about.html"></a>').fancybox().click();
+            });
+		});
+	</script>
+    
+    <title>
+        Tumblr Likes Grid
+    </title>
+    
+    <style type="text/css">
+        div.node {
+          width: auto;
+          height: auto;
+          padding: 0;
+          margin: 0 auto;
+          max-width: 100%;
+        }
+
+        ul.column {
+            padding:0;
+            margin:0;
+            list-style:none;
+            height:auto;
+            float:left;
+            position:relative;
+        }
+        
+        div.container {
+            width: 100%;
+        }
+        
+        a.brick {
+            min-height: 82px;
+        }
+        
+        #content .heading {
+            padding: 20px 0 13px 0;
+        }
+        
+        #content {
+            margin-left: auto;
+            margin-right: auto;
+            width: 1075px;
+        }
+        
+        .centerText {
+            text-align: center;
+        }
+        
+        #content .brick .title.popoutText {
+            position:absolute;
+            z-index:100;
+            top: 25%;
+            color: white;
+            text-shadow: black 0.1em 0.1em 0.2em;
+            font-size: 14px;
+        }
+        
+        .date sup {
+            font-size: 10px;
+        }
+        
+        #pagination {
+            clear: both;
+        }
+    </style>
+  </head>
+  
+  <body>
+    <div id="nav">
+        <a href="#" class="blog_title">&nbsp;</a>
+        <div class="header_button">
+            <button id="logout" type="button" class="chrome big_dark" onclick="window.location='?logout'">
+                <div class="chrome_button">
+                    <div class="chrome_button_left"></div>
+                    Logout
+                    <div class="chrome_button_right"></div>
+                </div>
+            </button>
+        </div>        
+        <div class="header_button">
+            <button id="about" type="button" class="chrome big_dark">
+                <div class="chrome_button">
+                    <div class="chrome_button_left"></div>
+                    About
+                    <div class="chrome_button_right"></div>
+                </div>
+            </button>
+        </div>
+    </div>
+    
+    <div id="content" class="grid"></div>
+    
+    <div id="pagination">
+        <div id="loading"><span>Loading...</span></div>
+    </div>
+</body>
+</html>
