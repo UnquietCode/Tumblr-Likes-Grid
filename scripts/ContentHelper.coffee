@@ -154,7 +154,7 @@ class ContentHelper
 
 		if post.photos.length > 0
 			sizes = post.photos[0].alt_sizes
-			img = sizes.length-3 < 0 ? sizes.length-1 : sizes.length-3
+			img = if sizes.length-3 < 0 then sizes.length-1 else sizes.length-3
 			img = sizes[img]
 			thumbnail.url = img.url
 			thumbnail.height = img.height
@@ -174,8 +174,8 @@ class ContentHelper
 		;
 
 		info += "<br/>" + post.album  if post.album and post.album.length > 0
-		ctx.info = info.length > 0 ? info : null
-		ctx.thumbnail = post.album_art  if post.album_art and post.album_art.length > 0
+		ctx.info = if info.length > 0 then info else null
+		ctx.thumbnail = post.album_art if post.album_art and post.album_art.length > 0
 	;
 
 	setContextForVideo = (post, ctx) ->
@@ -251,7 +251,7 @@ class ContentHelper
 	makeTime = (hours, minutes) ->
 		pm = hours >= 12
 		str = (hours % 12) + ":"
-		str += (minutes < 10 ? "0" : "") + minutes
-		str += pm ? "pm" : "am"
+		str += (if minutes < 10 then "0" else "") + minutes
+		str += if pm then "pm" else "am"
 		return str
 	;

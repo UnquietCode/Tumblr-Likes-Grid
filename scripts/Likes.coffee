@@ -16,7 +16,7 @@ class @Likes
 		etc = etc or ->
 
 		console.log "getting likes at offset " + currentOffset if @debug
-		next = runs is 1 ? etc : -> getLikes(runs- 1, etc)
+		next = if runs is 1 then etc else -> getLikes(runs- 1, etc)
 
 		$.ajax
 			url: "?getData&offset=" + currentOffset
