@@ -1,4 +1,4 @@
-coffeescript-concat -o output.coffee -I js js/Likes.coffee
+coffeescript-concat -o output.coffee scripts/UQC.coffee scripts/ContentHelper.coffee scripts/Likes.coffee
 coffee -o . output.coffee
-mv output.js likes.js
+mv output.js content/js/likes.js
 rm output.coffee
