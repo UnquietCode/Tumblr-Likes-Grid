@@ -25,25 +25,19 @@ class ContentHelper
 			console.log "received posts:"
 			console.log posts
 
-		# loops through the posts
-		html = ""
-		i = 0
-
-		while i < posts.length
-			post = posts[i]
-
+		for post in posts
 			# should we add a month divider?
 			date = new Date(post.timestamp * 1000)
-			appendMonth "<div class=\"heading\">" + likes.MONTHS[date.getMonth()] + " " + date.getFullYear() + "</div>"  if date.getMonth() isnt likes.lastMonth
+			appendMonth "<div class=\"heading\">" + MONTHS[date.getMonth()] + " " + date.getFullYear() + "</div>"  if date.getMonth() isnt lastMonth
 
 			# template context
-			ctx = likes.mustache.createContext()
+			ctx = createContext()
 			ctx.date =
 				year: date.getYear()
 				month: date.getMonth()
 				day: date.getDay()
-				shortForm: likes.makeDate(date.getMonth(), date.getDate())
-				time: likes.makeTime(date.getHours(), date.getMinutes())
+				shortForm: makeDate(date.getMonth(), date.getDate())
+				time: makeTime(date.getHours(), date.getMinutes())
 
 			ctx.id = post.id
 			ctx.type = post.type
@@ -64,6 +58,8 @@ class ContentHelper
 				when "answer" then setContextForAnswer(post, ctx)
 
 			# thumbnail dimensions
+			thumbnail = ctx.thumbnail
+
 			if thumbnail and thumbnail.height and thumbnail.height < ctx.height
 				if thumbnail.height < MIN_HEIGHT
 					ctx.height = MIN_HEIGHT
@@ -75,13 +71,12 @@ class ContentHelper
 			ctx.text = $("<div>" + ctx.text + "</div>").text()
 
 			# if title is too big, truncate it
-			ctx.title = ctx.title.substring(0, 210)  if ctx.title and ctx.title.length > 210
+			ctx.title = ctx.title.substring(0, 210) if ctx.title and ctx.title.length > 210
 
 			# if text is too big, truncate it
-			ctx.text = ctx.text.substring(0, 180) + " [...]"  if ctx.text.length > 180
-			likes.lastMonth = date.getMonth()
-			likes.append likes.mustache.renderTemplate("node", ctx)
-			++i
+			ctx.text = ctx.text.substring(0, 180) + " [...]" if ctx.text.length > 180
+			lastMonth = date.getMonth()
+			append(renderTemplate("node", ctx))
 		;
 	;
 
@@ -124,10 +119,6 @@ class ContentHelper
 		}
 	;
 
-	fadeIn = (nodeId) ->
-		node = $("#" + nodeId)
-	;
-
 	# --- content methods ---
 
 	setContextForChat = (post, ctx) ->
@@ -163,7 +154,7 @@ class ContentHelper
 
 		if post.photos.length > 0
 			sizes = post.photos[0].alt_sizes
-			img = if sizes.length-3 < 0 ? sizes.length-1 : sizes.length-3
+			img = sizes.length-3 < 0 ? sizes.length-1 : sizes.length-3
 			img = sizes[img]
 			thumbnail.url = img.url
 			thumbnail.height = img.height
@@ -202,7 +193,7 @@ class ContentHelper
 				x = 0
 
 				while x < frames.length
-					frames[x] = url: decodeURIComponent(frames[x])
+					frames[x] = { url: decodeURIComponent(frames[x]) }
 					++x
 
 				ctx.frames = frames
@@ -235,9 +226,9 @@ class ContentHelper
 		#var cur = nodes.length + 1;
 		col = (nodes.length) % COLUMNS
 		node = $("<li class=\"stack\" style=\"display:none;\">")
-		node.append html
-		$($(".grid .container:last ul.column")[col]).append node
-		node.fadeIn 600
+		node.append(html)
+		$($(".grid .container:last ul.column")[col]).append(node)
+		node.fadeIn(600)
 	;
 
 	makeDate = (month, day) ->

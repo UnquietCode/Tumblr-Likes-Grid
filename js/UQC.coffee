@@ -1,4 +1,4 @@
-class @UQC
+class UQC
 
 	# this is from Brian's jsUtil.js => https://github.com/brian-c/js-util
 	@bind = (scope, func, args) ->
