@@ -1,9 +1,9 @@
 <html>
 <head>
-    <link href="../client/archive.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="../client/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
+    <link href="archive.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
     <script type="text/javascript" src="jquery-1.7.1.min.js"></script>
-    <script type="text/javascript" src="../client/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+    <script type="text/javascript" src="fancybox/jquery.fancybox-1.3.4.pack.js"></script>
     <script type="text/javascript" src="mustache.js"></script>
     <script type="text/javascript" src="likes.js"></script>
 	<script type="text/javascript">
@@ -11,8 +11,23 @@
             Likes.startUp();
             
             $("#about").click(function() {
-                $('<a href="../client/about.html"></a>').fancybox().click();
+                $('<a href="about.html"></a>').fancybox().click();
             });
+
+			$("a.remove").live("click", function() {
+				var xBox = $(this);
+
+				if (xBox.hasClass("active")) {
+					Likes.unlike({
+						id: xBox.attr("data-id"),
+						key: xBox.attr("data-key")
+					})
+				} else {
+					xBox.addClass("active");
+				}
+
+				return false;
+			});
 		});
 	</script>
     

@@ -13,6 +13,7 @@ $authorizeURL    = 'http://www.tumblr.com/oauth/authorize';
 $accessTokenURL  = 'http://www.tumblr.com/oauth/access_token';
 $tumblr_get_likes_api = "http://api.tumblr.com/v2/user/likes";
 $tumblr_get_user_info_api = "http://api.tumblr.com/v2/user/info";
+$tumblr_unlike_post_api = "http://api.tumblr.com/v2/user/unlike";
 
 require 'class-xhttp-php/class.xhttp.php'; # uncomment if you don't use autoloading
 
@@ -106,6 +107,7 @@ if(isset($_GET['getData']) and $_SESSION['loggedin']) {
    die();
 }
 
+# get user info
 if(isset($_GET['getUserName']) and $_SESSION['loggedin']) {
     # Set access token
     $tumblr->set_token($_SESSION['oauth_token'], $_SESSION['oauth_token_secret']);
@@ -118,6 +120,28 @@ if(isset($_GET['getUserName']) and $_SESSION['loggedin']) {
 
    if($response['successful']) {
      echo($response['body']); 
+   } else {
+     echo "{ failed : true }";
+   }
+
+   die();
+}
+
+# unlike a post
+if(isset($_GET['unlike']) and $_SESSION['loggedin']) {
+    $tumblr->set_token($_SESSION['oauth_token'], $_SESSION['oauth_token_secret']);
+    $offset = $_GET['offset'];
+
+    $data = array();
+    $data['post'] = array(
+        "id" => $_GET['postID'],
+        "reblog_key" => $_GET['reblogKey']
+    );
+
+    $response = $tumblr->fetch($tumblr_unlike_post_api, $data);
+
+   if($response['successful']) {
+     echo($response['body']);
    } else {
      echo "{ failed : true }";
    }

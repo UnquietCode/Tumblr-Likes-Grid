@@ -40,6 +40,7 @@ class ContentHelper
 				time: makeTime(date.getHours(), date.getMinutes())
 
 			ctx.id = post.id
+			ctx.key = post.reblog_key
 			ctx.type = post.type
 			ctx.url = post.post_url #post.link_url || post.post_url;
 			ctx.user = post.blog_name
@@ -221,7 +222,7 @@ class ContentHelper
 	;
 
 	append = (html) ->
-		nodes = $(".grid .container:last a.brick")
+		nodes = $(".grid .container:last div.brick")
 
 		#var cur = nodes.length + 1;
 		col = (nodes.length) % COLUMNS

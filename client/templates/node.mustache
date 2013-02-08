@@ -1,4 +1,4 @@
-<a id="post-{{id}}" target="_blank" class="brick {{type}}" href="{{url}}">
+<div class="brick {{type}}" id="{{id}}">
 	{{! dynamic partial rendering }}
 	{{#dynamicPartial}}
 	    _{{type}}
@@ -6,12 +6,14 @@
 
 	{{! always render overlay }}
 	<div class="overlay">
-	    <div class="inner">
-		<div class="blogName">{{user}}</div>
+		<a class="remove" href="#" data-id="{{id}}" data-key="{{key}}">X</a>
+	    <a class="inner" id="post-{{id}}"
+	       target="_blank" href="{{url}}">
+			<div class="blogName">{{user}}</div>
 	        <div class="date">{{{date.shortForm}}}</div>
 	        {{#noteCount}}
 	            <div class="notes">{{date.time}}</div>
 	        {{/noteCount}}
-	    </div>
+	    </a>
 	</div>
-</a>
+</div>

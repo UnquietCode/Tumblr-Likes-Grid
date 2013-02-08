@@ -80,6 +80,32 @@ class @Likes
 		blog.html(text)
 	;
 
+	# --- unlike posts ---
+
+	@unlike = (post) ->
+		$.ajax
+			url: "?unlike=true&postID=#{post.id}&reblogKey=#{post.key}"
+			success: (data) ->
+				successForUnlike(post.id, data)
+
+			error: (data) ->
+				failForUnlike(data)
+	;
+
+	successForUnlike = (id, data) ->
+		console.log("unliked post #{id}") if @debug
+		$("#"+id+" a.remove").remove()
+		$("#"+id+" img").remove()
+		$("#"+id+" div.overprint").remove()
+		$("#"+id+" div.play_overlay").remove()
+		$("#"+id+" div.caption").remove()
+		$("#"+id).addClass("removed")
+	;
+
+	failForUnlike = (data) ->
+		alert("Sorry, but an error has occurred.")
+	;
+
 	# --- infinite scroll ---
 
 	scrollWatch = ->
