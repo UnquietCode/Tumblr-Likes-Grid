@@ -5,9 +5,10 @@
     <script type="text/javascript" src="jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="fancybox/jquery.fancybox-1.3.4.pack.js"></script>
     <script type="text/javascript" src="mustache.js"></script>
-    <script type="text/javascript" src="likes.js"></script>
-	<script type="text/javascript">
-		$(function() {
+    
+   <script type="text/coffeescript" src="Likes.coffee"></script>
+   <script type="text/coffeescript">
+`		$(function() {
             Likes.startUp();
             
             $("#about").click(function() {
@@ -28,9 +29,9 @@
 
 				return false;
 			});
-		});
+		});`
 	</script>
-    
+    <script type="text/javascript" src="coffee-script.js"></script>
     <title>
         Tumblr Likes Grid
     </title>
@@ -116,7 +117,18 @@
             </button>
         </div>
     </div>
-    
+<div style="margin-left:5%">
+  <h1>Hey!</h1>
+This site is going away soon. I can't afford the hosting costs right now, and I haven't been able to find the time to keep the code stable.
+  <br>  <br>
+All of the source code is available on <a href="https://github.com/UnquietCode/Tumblr-Likes-Grid">GitHub</a>, and anyone is free to continue development or host their own instance.
+  <br>  <br>
+Thank you all for your support! I had a fun time writing this page, and I hope you enjoyed using it.
+  <br>  <br>
+Cheers,<br>
+Ben</div>   
+
+ 
     <div id="content" class="grid"></div>
     
     <div id="pagination">
