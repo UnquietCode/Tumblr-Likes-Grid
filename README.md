@@ -1,3 +1,9 @@
+# Deprecated!
+
+This project is no longer being hosted or maintained. Please feel free to fork the code or spin up your own server.
+
+
+
 # Tumblr Likes Grid
 
 This project is an attempt to streamline the display of a user's 'likes' on Tumblr. The grid is based off of the
