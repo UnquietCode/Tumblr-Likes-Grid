@@ -18,19 +18,23 @@ class ContentHelper
 	@debug = false
 	lastMonth = -1
 	templateCache = {}
-
+	sections = {}
 
 	@setContent = (posts) ->
 		if @debug
 			console.log "received posts:"
 			console.log posts
+		#posts.sort((a, b) -> b.timestamp - a.timestamp)		
 
 		for post in posts
 			# should we add a month divider?
 			date = new Date(post.timestamp * 1000)
-			appendMonth "<div class=\"heading\">" + MONTHS[date.getMonth()] + " " + date.getFullYear() + "</div>"  if date.getMonth() isnt lastMonth
+			sectionName = "#{date.getYear()}:#{date.getMonth()}"
 
-			# template context
+			if date.getMonth() isnt lastMonth
+				appendMonth("<div class=\"heading\">#{MONTHS[date.getMonth()]} #{date.getFullYear()}</div>", sectionName)
+
+			#templating
 			ctx = createContext()
 			ctx.date =
 				year: date.getYear()
@@ -77,7 +81,7 @@ class ContentHelper
 			# if text is too big, truncate it
 			ctx.text = ctx.text.substring(0, 180) + " [...]" if ctx.text.length > 180
 			lastMonth = date.getMonth()
-			append(renderTemplate("node", ctx))
+			append(renderTemplate("node", ctx), sectionName)
 		;
 	;
 
@@ -209,26 +213,33 @@ class ContentHelper
 
 	# --- helpers ---
 
-	appendMonth = (html) ->
-		# create a new container, add a date object
-		container = $("<div class=\"container\">")
-		container.append html
-		i = 0
+	appendMonth = (html, sectionName) ->
+		section = sections[sectionName]
+		
+		if not section
+			# create a new container, add a date object
+			container = $("<div class=\"container\">")
+			container.append html
+			
+			i = 0
 
-		while i < COLUMNS
-			container.append $("<ul class=\"column\">")
-			++i
-		$(".grid").append container
+			while i < COLUMNS
+				container.append $("<ul class=\"column\">")
+				++i
+			
+			section = container
+			sections[sectionName] = section
+			$(".grid").append section
 	;
 
-	append = (html) ->
-		nodes = $(".grid .container:last div.brick")
-
-		#var cur = nodes.length + 1;
+	append = (html, sectionName) ->
+		section = sections[sectionName]
+		nodes = section.find("div.brick")
 		col = (nodes.length) % COLUMNS
 		node = $("<li class=\"stack\" style=\"display:none;\">")
 		node.append(html)
-		$($(".grid .container:last ul.column")[col]).append(node)
+		#$($(".grid .container:last ul.column")[col]).append(node)
+		$(section.find("ul.column")[col]).append(node)
 		node.fadeIn(600)
 	;
 
