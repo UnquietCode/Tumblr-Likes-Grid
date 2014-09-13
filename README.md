@@ -1,6 +1,6 @@
 # Deprecated!
 
-This project is no longer being hosted or maintained. Please feel free to fork the code or spin up your own server.
+This project is no longer being improved or hosted. Please feel free to fork the code or spin up your own server.
 
 
 
@@ -11,7 +11,7 @@ archive page, and uses REST calls to the Tumblr API to populate the tiles.
 
 Uses:
 + PHP for OATH authentication with Tumblr
-+ JavaScript
++ CoffeeScript
 + [mustache.js](https://github.com/janl/mustache.js/) for template rendering
 + Tumblr's own styles and images
 
