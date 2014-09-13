@@ -131,3 +131,5 @@ class @Likes
 		getLikes(2)
 		scrollWatch()
 	;
+	
+window.Likes = Likes	
