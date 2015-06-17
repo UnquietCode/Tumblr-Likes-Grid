@@ -24,7 +24,7 @@ class ContentHelper
 		if @debug
 			console.log "received posts:"
 			console.log posts
-		#posts.sort((a, b) -> b.timestamp - a.timestamp)		
+		#posts.sort((a, b) -> b.timestamp - a.timestamp)
 
 		for post in posts
 			# should we add a month divider?
@@ -93,7 +93,7 @@ class ContentHelper
 			ctx = {}
 
 			$.ajax
-				url: "templates/#{name}.mustache"
+				url: "/assets/templates/#{name}.mustache"
 				async: false
 				context: ctx
 
@@ -215,18 +215,18 @@ class ContentHelper
 
 	appendMonth = (html, sectionName) ->
 		section = sections[sectionName]
-		
+
 		if not section
 			# create a new container, add a date object
 			container = $("<div class=\"container\">")
 			container.append html
-			
+
 			i = 0
 
 			while i < COLUMNS
 				container.append $("<ul class=\"column\">")
 				++i
-			
+
 			section = container
 			sections[sectionName] = section
 			$(".grid").append section

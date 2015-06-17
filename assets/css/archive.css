@@ -39,7 +39,7 @@ button.chrome::-moz-focus-inner {
 }
 
 button.chrome .chrome_button {
-	background: url('images/chrome_button_bg.png') top left repeat-x transparent;
+	background: url('/assets//assets/images/chrome_button_bg.png') top left repeat-x transparent;
 	position: relative;
 	min-width: 0;
 	white-space: nowrap;
@@ -48,7 +48,7 @@ button.chrome .chrome_button {
 }
 
 @-moz-document url-prefix(){button.chrome .chrome_button{padding-top:6px}} button.chrome .chrome_button .chrome_button_left {
-	                                                                           background: url('images/chrome_button_left.png') top left no-repeat transparent;
+	                                                                           background: url('/assets/images/chrome_button_left.png') top left no-repeat transparent;
 	                                                                           position: absolute;
 	                                                                           top: 0;
 	                                                                           left: -3px;
@@ -56,7 +56,7 @@ button.chrome .chrome_button {
                                                                            }
 
 button.chrome .chrome_button .chrome_button_right {
-	background: url('images/chrome_button_right.png') top right no-repeat transparent;
+	background: url('/assets/images/chrome_button_right.png') top right no-repeat transparent;
 	position: absolute;
 	top: 0;
 	right: -3px;
@@ -71,19 +71,19 @@ button.chrome.big_dark {
 }
 
 button.chrome.big_dark .chrome_button {
-	background-image: url('images/archive_header_button_bg.png');
+	background-image: url('/assets/images/archive_header_button_bg.png');
 	padding: 8px 8px 7px 8px;
 	margin: 0 5px
 }
 
 button.chrome.big_dark .chrome_button .chrome_button_left {
-	background-image: url('images/archive_header_button_left.png');
+	background-image: url('/assets/images/archive_header_button_left.png');
 	left: -5px;
 	padding: 15px 5px 16px 5px
 }
 
 button.chrome.big_dark .chrome_button .chrome_button_right {
-	background-image: url('images/archive_header_button_right.png');
+	background-image: url('/assets/images/archive_header_button_right.png');
 	right: -5px;
 	padding: 15px 5px 16px 5px
 }
@@ -124,7 +124,7 @@ button.chrome[disabled] {
 	right: 0;
 	bottom: 0;
 	height: 10px;
-	background: url('images/archive_content_shadow.png?2') bottom left repeat-x transparent
+	background: url('/assets/images/archive_content_shadow.png?2') bottom left repeat-x transparent
 }
 
 #nav a.blog_title {
@@ -145,7 +145,7 @@ button.chrome[disabled] {
 	width: 348px;
 	height: 229px;
 	padding: 8px 9px;
-	background: url('images/archive_browse_months_widget.png?alpha') top left no-repeat transparent;
+	background: url('/assets/images/archive_browse_months_widget.png?alpha') top left no-repeat transparent;
 	font: bold 15px Arial, Helvetica, sans-serif;
 	cursor: default
 }
@@ -231,7 +231,7 @@ button.chrome[disabled] {
 }
 
 #nav #search {
-	background: url('images/archive_search.png?alpha&3') top left no-repeat transparent;
+	background: url('/assets/images/archive_search.png?alpha&3') top left no-repeat transparent;
 	height: 26px;
 	width: 167px;
 	position: relative;
@@ -276,7 +276,7 @@ button.chrome[disabled] {
 
 #pagination #loading span {
 	display: inline-block;
-	background: url('images/loading.gif') left no-repeat transparent;
+	background: url('/assets/images/loading.gif') left no-repeat transparent;
 	padding: 0 28px 0 26px
 }
 
@@ -315,7 +315,7 @@ button.chrome[disabled] {
 	float: left;
 	width: 125px;
 	height: 125px;
-	background: url('images/archive_brick.png') center no-repeat #d8dadd;
+	background: url('/assets/images/archive_brick.png') center no-repeat #d8dadd;
 	margin: 0 6px 6px 0;
 	padding: 0;
 	overflow: hidden;
@@ -326,7 +326,7 @@ button.chrome[disabled] {
 }
 
 #content .brick .overlay {
-	background: url('images/archive_overlay.png') top center repeat transparent;
+	background: url('/assets/images/archive_overlay.png') top center repeat transparent;
 	border: 1px solid #2e2e2e;
 	position: absolute;
 	top: 0;
@@ -367,7 +367,7 @@ button.chrome[disabled] {
 }
 
 #content .brick .private_overlay {
-	background: url('images/private_overlay_large.png') center no-repeat transparent;
+	background: url('/assets/images/private_overlay_large.png') center no-repeat transparent;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -420,7 +420,7 @@ button.chrome[disabled] {
 }
 
 #content .brick.video .play_overlay {
-	background: url('images/play_overlay_large.png') center no-repeat transparent;
+	background: url('/assets/images/play_overlay_large.png') center no-repeat transparent;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -453,7 +453,7 @@ button.chrome[disabled] {
 }
 
 #content .brick.audio .listen_overlay {
-	background: url('images/listen_overlay_large.png') center no-repeat transparent;
+	background: url('/assets/images/listen_overlay_large.png') center no-repeat transparent;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -508,7 +508,7 @@ button.chrome[disabled] {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background: url('images/archive_brick_highlight_bg.png') top left repeat transparent;
+	background: url('/assets/images/archive_brick_highlight_bg.png') top left repeat transparent;
 	border: 3px solid #73bae7;
 	border-color: rgba(115, 186, 231, 0.8)
 }
