@@ -320,9 +320,9 @@
 
     function Likes() {}
 
-    Likes.debug = true;
+    Likes.debug = false;
 
-    Likes.tumblr;
+    Likes.tumblr = void 0;
 
     currentOffset = 0;
 
@@ -343,18 +343,14 @@
       next = runs === 1 ? etc : function() {
         return getLikes(runs - 1, etc);
       };
-      Likes.tumblr.get("https://api.tumblr.com/v2/user/likes").done(function(data) {
+      Likes.tumblr.get("https://api.tumblr.com/v2/user/likes?offset=" + currentOffset).done(function(data) {
         if (this.debug) {
           console.log("200 OK /v2/user/likes");
         }
-        console.log(data);
         successForLikes(data);
         return next();
       }).fail(function(err) {
-        if (this.debug) {
-          console.log(err);
-        }
-        failForLikes();
+        failForLikes(err);
         return next();
       });
       currentOffset += 20;
@@ -389,10 +385,7 @@
         }
         return successForUserInfo(data);
       }).fail(function(err) {
-        if (this.debug) {
-          console.log(err);
-        }
-        return failForUserInfo(data);
+        return failForUserInfo(err);
       });
     };
 
@@ -400,7 +393,9 @@
       if (this.debug) {
         console.log("got user data");
       }
-      console.log(data);
+      if (this.debug) {
+        console.log(data);
+      }
       return setHeaderInfoComplete(data.response.user.likes, data.response.user.name, data.response.user.blogs[0].url);
     };
 
@@ -419,12 +414,14 @@
 
     Likes.unlike = function(post) {
       return Likes.tumblr.post("https://api.tumblr.com/v2/user/unlike", {
-        "id": post.id,
-        "reblog_key": post.key
+        data: {
+          "id": post.id,
+          "reblog_key": post.key
+        }
       }).done(function(data) {
         return successForUnlike(post.id, data);
       }).fail(function(err) {
-        return failForUnlike(data);
+        return failForUnlike(err);
       });
     };
 
@@ -465,9 +462,7 @@
 
     Likes.startUp = function() {
       console.log("Tumblr Likes Grid, by Ben Fagin\nhttp://life.unquietcode.com\n\n");
-      console.log("Initialize Oauth.js");
       OAuth.initialize('eUqCWTW-6VpWWcOvj8edJ6aKNUo');
-      console.log("Get cached credentials");
       Likes.tumblr = OAuth.create("tumblr");
       setHeaderInfo();
       getLikes(2);

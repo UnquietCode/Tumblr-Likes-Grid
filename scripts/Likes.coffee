@@ -1,8 +1,8 @@
 #= require ContentHelper
 
 class @Likes
-	@debug = true
-	@tumblr
+	@debug = false
+	@tumblr = undefined
 
 	currentOffset = 0
 	isScrolling = false
@@ -20,15 +20,14 @@ class @Likes
 		next = if runs is 1 then etc else -> getLikes(runs- 1, etc)
 
 		# --- GET /v2/user/likes ---
-		Likes.tumblr.get "https://api.tumblr.com/v2/user/likes"
+		Likes.tumblr.get "https://api.tumblr.com/v2/user/likes?offset=#{currentOffset}"
 			.done (data) ->
 				console.log "200 OK /v2/user/likes" if @debug
-				console.log data
+
 				successForLikes(data)
 				next()
 			.fail (err) ->
-				console.log err if @debug
-				failForLikes()
+				failForLikes(err)
 				next()
 
 		currentOffset += 20
@@ -61,13 +60,13 @@ class @Likes
 				console.log "200 OK /v2/user/info" if @debug
 				successForUserInfo(data)
 			.fail (err) ->
-				console.log err if @debug
-				failForUserInfo(data)
+				failForUserInfo(err)
 	;
 
 	successForUserInfo = (data) ->
 		console.log "got user data" if @debug
-		console.log data
+		console.log data if @debug
+
 		setHeaderInfoComplete(data.response.user.likes, data.response.user.name, data.response.user.blogs[0].url)
 	;
 
@@ -86,11 +85,11 @@ class @Likes
 	# --- unlike posts ---
 
 	@unlike = (post) ->
-		Likes.tumblr.post "https://api.tumblr.com/v2/user/unlike", {"id": post.id, "reblog_key": post.key}
+		Likes.tumblr.post "https://api.tumblr.com/v2/user/unlike", {data: {"id": post.id, "reblog_key": post.key}}
 			.done (data) ->
 				successForUnlike(post.id, data)
 			.fail (err) ->
-				failForUnlike(data)
+				failForUnlike(err)
 	;
 
 	successForUnlike = (id, data) ->
@@ -128,10 +127,7 @@ class @Likes
 
 	@startUp = ->
 		console.log "Tumblr Likes Grid, by Ben Fagin\nhttp://life.unquietcode.com\n\n"
-		console.log "Initialize Oauth.js"
 		OAuth.initialize 'eUqCWTW-6VpWWcOvj8edJ6aKNUo'
-
-		console.log "Get cached credentials"
 		Likes.tumblr = OAuth.create "tumblr"
 
 		# TODO: redirect to '/' if user not login yet ---

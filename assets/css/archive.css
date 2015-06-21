@@ -39,7 +39,7 @@ button.chrome::-moz-focus-inner {
 }
 
 button.chrome .chrome_button {
-	background: url('/assets//assets/images/chrome_button_bg.png') top left repeat-x transparent;
+	background: url('/assets/images/chrome_button_bg.png') top left repeat-x transparent;
 	position: relative;
 	min-width: 0;
 	white-space: nowrap;

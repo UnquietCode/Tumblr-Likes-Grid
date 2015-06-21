@@ -11,30 +11,21 @@
             $(function(){
                 console.log("Initialize Oauth.js");
                 OAuth.initialize('eUqCWTW-6VpWWcOvj8edJ6aKNUo');
+
                 $("#signin").click(function(){
                     console.log("#signin clicked");
-                    // start oauth
+
+                    // start oauth flow
                     OAuth.popup('tumblr', {cache: true}).done(function(tumblr) {
-                        // make API calls with `facebook`
                         console.log("User succesfully logedin");
                         console.log(tumblr);
 
                         // redirect to /likes
                         window.location = "/likes";
-                       // tumblr.me().done(function(data){
-                       //     console.log(data);
-                       // }).fail(function(err){
-                       //     console.log(err);
-                       // });
 
-                       // tumblr.get("https://api.tumblr.com/v2/user/info").done(function(data){
-                       //     console.log(data);
-                       // }).fail(function(err){
-                       //     console.log(err);
-                       // //});
                     }).fail(function(err) {
                         // todo when the OAuth flow failed
-                        console.log("oauth fail: " + err);
+                        alert("authentication failed: " + err);
                     });
                 });
             });
