@@ -1,5 +1,3 @@
-[![Tip with Gratipay](https://assets.gratipay.com/gratipay.svg)](https://gratipay.com/UnquietCode) [![Tip with Bitcoin](http://www.unquietcode.com/e_e/bitcoin.png)](https://blockchain.info/address/1Ec6mzLpJQvuzXqhxfJz1h9ZwJmoHMW9BX)**Bitcoin**
-
 # Deprecated!
 
 This project is no longer being improved or hosted. Please feel free to fork the code or spin up your own server.
